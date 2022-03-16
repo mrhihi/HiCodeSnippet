@@ -10,7 +10,7 @@
  */
 
 
-declare @dts varchar(200)='HRS_RADAR_M,HRS_ENVERS_M,HRS_DATAHUB_M,HRS_SC30_M' /* 改這裡 */
+declare @dts varchar(200)='資料庫名字1,資料庫名字2' /* 改這裡 */
 
 /* 以下不用改 */
 declare @sql nvarchar(4000)
