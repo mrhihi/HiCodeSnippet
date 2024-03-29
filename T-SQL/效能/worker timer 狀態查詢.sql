@@ -1,4 +1,4 @@
-1¡B§ä¥X³Ì¯Ó¥ÎIOªº»yªk
+-- 1ã€æ‰¾å‡ºæœ€è€—ç”¨IOçš„èªæ³•
 SELECT TOP 10
 total_logical_reads,
 total_logical_writes,
@@ -12,7 +12,7 @@ CROSS APPLY sys.dm_exec_sql_text(sql_handle) st
 WHERE total_logical_reads+total_logical_writes> 0
 ORDER BY [IO_total] DESC
 
-2¡B¦C¥X¥Ø«e³Ì¯Ó¥ÎCPUªº«e50­Ó¬d¸ß
+-- 2ã€åˆ—å‡ºç›®å‰æœ€è€—ç”¨CPUçš„å‰50å€‹æŸ¥è©¢
 SELECT  TOP 50
 qs.total_worker_time / qs.execution_count AS[Avg CPU Time],
 SUBSTRING(qt.text, qs.statement_start_offset / 2,
@@ -24,7 +24,7 @@ FROM     sys.dm_exec_query_stats AS qs
 CROSS APPLY sys.dm_exec_sql_text (qs.sql_handle) AS qt
 ORDER BY [Avg CPU Time] DESC;
 
-3¡B¦C¥X¥Ø«e³Ì¯Ó¥ÎWorker Timeªº«e50­Ó¬d¸ß
+-- 3ã€åˆ—å‡ºç›®å‰æœ€è€—ç”¨Worker Timeçš„å‰50å€‹æŸ¥è©¢
 SELECT   TOP 50 sum(qs.total_worker_time) AS total_cpu_time,
                 sum(qs.execution_count) AS total_execution_count,
                 count(*) AS '#_statements',

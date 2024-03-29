@@ -7,7 +7,7 @@ create procedure spConvertIF2TF
 -- =============================================
 -- Author:		<mrhihi>
 -- Create date: <2015.09.25>
--- Description:	<±N Inline Table value UDF Âà´«¦¨ Table value UDF>
+-- Description:	<å°‡ Inline Table value UDF è½‰æ›æˆ Table value UDF>
 -- History:     <2015.09.25>	[V1.0] New Create
 -- Ex.	
 			
@@ -28,18 +28,18 @@ begin
     declare @TMPTBLNAME nvarchar(max); set @TMPTBLNAME = '@result_if2tf';
     declare @NEWLINETAG nvarchar(max); set @NEWLINETAG='[NEWLINE]';
 
-    begin /** ÀË¬d¿é¤J°Ñ¼Æ¬O§_¦Xªk */
+    begin /** æª¢æŸ¥è¼¸å…¥åƒæ•¸æ˜¯å¦åˆæ³• */
         if (not exists (select id from sysobjects where xtype = 'IF' and id = @oid)) begin
-            print @oname + ' ¤£¬O Inline Table «¬ºAªº UDF! ±N¤£·|³B²zÂà´«!';
+            print @oname + ' ä¸æ˜¯ Inline Table å‹æ…‹çš„ UDF! å°‡ä¸æœƒè™•ç†è½‰æ›!';
             return;
         end
         if (isnull(@oname, '')='') begin
-            print @oid + ' §ä¤£¨ì¸Óª«¥ó!';
+            print @oid + ' æ‰¾ä¸åˆ°è©²ç‰©ä»¶!';
             return;
         end
     end
 
-    begin /** ¦X¨Ö udf sql »yªk(¦]¬°¤@µ§¥u°O 8000 ªø¡A¶Wªøªº·|³Q¤Á¦n´Xµ§) */
+    begin /** åˆä½µ udf sql èªæ³•(å› ç‚ºä¸€ç­†åªè¨˜ 8000 é•·ï¼Œè¶…é•·çš„æœƒè¢«åˆ‡å¥½å¹¾ç­†) */
         declare @i int = 0;
         declare @body nvarchar(4000); select @body=''
         declare @maxbody nvarchar(max); select @maxbody='';
@@ -54,14 +54,14 @@ begin
         end
     end
 
-    begin /** ¨ú±o udf ¦^¶Ç table ªº layout */
+    begin /** å–å¾— udf å›å‚³ table çš„ layout */
         declare @resultSchema varchar(8000)
         select @resultSchema = replace(stuff((select ',' + Sql + @NEWLINETAG from fnHelp2(@oid) for xml path('')), 1, 1,''),@NEWLINETAG, @CRLF)
     end
 
     declare @tempbody nvarchar(max); select @tempbody=''
 
-    begin /** §â returns as ¤¤¶¡´¡¤J table layout */
+    begin /** æŠŠ returns as ä¸­é–“æ’å…¥ table layout */
         declare @pos1 int, @pos2 int;
         select @tempbody = upper(@maxbody);
         select @pos1 = charindex('RETURNS', @tempbody);
@@ -75,7 +75,7 @@ begin
         end
     end
 
-    begin /** ³B²z Inline table ¶}ÀYªº "return (" §ï¦¨ begin ¤Î insert into */
+    begin /** è™•ç† Inline table é–‹é ­çš„ "return (" æ”¹æˆ begin åŠ insert into */
         declare @pos3 int, @pos4 int;
         select @pos3 = charindex('RETURN', @tempbody, @pos2 + 2);
         if (@pos3>0) begin
@@ -87,7 +87,7 @@ begin
         end
     end
 
-    begin /** ³B²z³Ì«áªº¬A©· ")" */
+    begin /** è™•ç†æœ€å¾Œçš„æ‹¬å¼§ ")" */
         select @tempbody = reverse(@maxbody);
         declare @pos5 int, @pos6 int;
         select @pos5 = charindex('dne', @tempbody);
@@ -106,11 +106,11 @@ begin
             exec ('drop function ' + @oname + @CRLF)
             exec (@maxbody)
         commit
-        print @oname + ' ±q IF Âà´«¦¨ TF §¹¦¨!';
+        print @oname + ' å¾ IF è½‰æ›æˆ TF å®Œæˆ!';
     END TRY
     BEGIN CATCH
         rollback
-        declare @errmsg nvarchar(4000); set @errmsg = @oname + ' ±q TF Âà´«¦¨ IF ¥¢±Ñ!' + @CRLF+ @CRLF + ERROR_MESSAGE();
+        declare @errmsg nvarchar(4000); set @errmsg = @oname + ' å¾ TF è½‰æ›æˆ IF å¤±æ•—!' + @CRLF+ @CRLF + ERROR_MESSAGE();
         print @errmsg;
     END CATCH
 

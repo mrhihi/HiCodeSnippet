@@ -1,4 +1,4 @@
-﻿    declare @spid int,
+    declare @spid int,
             @bl int,
             @intTransactionCountOnEntry int,
             @intRowcount int,

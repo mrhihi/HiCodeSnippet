@@ -1,5 +1,5 @@
 -- http://sqlmag.com/blog/what-best-value-fill-factor-index-fill-factor-and-performance-part-2
--- ´M§ä©Ò¦³ PK §t Identity Äæ¦ìªº¯Á¤Ş¡A­««Ø¦¨ Fill factor = 100 
+-- å°‹æ‰¾æ‰€æœ‰ PK å« Identity æ¬„ä½çš„ç´¢å¼•ï¼Œé‡å»ºæˆ Fill factor = 100 
 declare @sql nvarchar(max);
 
 select @sql = (

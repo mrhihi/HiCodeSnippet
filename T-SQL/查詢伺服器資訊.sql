@@ -1,4 +1,4 @@
-﻿
+
 
 -- https://ithelp.ithome.com.tw/articles/10079890
 -- https://docs.microsoft.com/zh-tw/sql/relational-databases/system-dynamic-management-views/sys-dm-os-sys-memory-transact-sql?view=sql-server-ver15

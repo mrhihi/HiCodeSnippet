@@ -1,4 +1,4 @@
-/* ¥Î DB ¤¤¦U Table ªº¸ê®Æªí¦WºÙ¡B¯Á¤Ş¦WºÙ¤Î¨äµ§¼Æ¡A­pºâ HASH ¡A¥Î¥HÀË¬d¨â­Ó DB ¬O§_¤@¼Ë */
+/* ç”¨ DB ä¸­å„ Table çš„è³‡æ–™è¡¨åç¨±ã€ç´¢å¼•åç¨±åŠå…¶ç­†æ•¸ï¼Œè¨ˆç®— HASH ï¼Œç”¨ä»¥æª¢æŸ¥å…©å€‹ DB æ˜¯å¦ä¸€æ¨£ */
 declare @exesql nvarchar(max)
 declare @sql nvarchar(max), @sql2 nvarchar(max)
 set @sql = '
@@ -6,7 +6,7 @@ declare @infoCount int, @idx int
 declare @dbinfo table(schema_table nvarchar(200), index_name nvarchar(200), row_count int, idx int identity)
 
 insert into @dbinfo(schema_table, index_name, row_count)
-SELECT  t.schema_name + '' ¡V '' + t.table_name AS schema_table , 
+SELECT  t.schema_name + '' â€“ '' + t.table_name AS schema_table , 
         t.index_name , 
         SUM(t.tbl_rows) AS rows 
 FROM    ( SELECT    s.name schema_name , 
@@ -55,8 +55,8 @@ declare @result table(dbName nvarchar(200), hash varchar(max))
 declare @variableTable table(dbName nvarchar(200), tables nvarchar(max), idx int identity)
 declare @var_count int, @idx int
 declare @var_dbname nvarchar(200), @var_tables nvarchar(max)
-/* dbName: ±ıÀË¬dªº¸ê®Æ®w
- * tables: ±ıÀË¬dªº¸ê®Æªí(ªÅ¦r¦êªí¥Ü¥ş§ä)(¥H³r¸¹¤À¹j ex: '''EMP_EMPLOYEE'',''ORG_DEPART''')
+/* dbName: æ¬²æª¢æŸ¥çš„è³‡æ–™åº«
+ * tables: æ¬²æª¢æŸ¥çš„è³‡æ–™è¡¨(ç©ºå­—ä¸²è¡¨ç¤ºå…¨æ‰¾)(ä»¥é€—è™Ÿåˆ†éš” ex: '''EMP_EMPLOYEE'',''ORG_DEPART''')
  **/
 insert into @variableTable(dbName, tables) select 'HR31_SC30_E', ''''''
 insert into @variableTable(dbName, tables) select 'HR31_WF20_T', ''''''

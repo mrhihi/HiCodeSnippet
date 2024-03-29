@@ -1,4 +1,4 @@
--- �ѦҸ�ơG https://technet.microsoft.com/en-us/library/jj643251.aspx?f=255&MSPPError=-2147217396
+-- 參考資料： https://technet.microsoft.com/en-us/library/jj643251.aspx?f=255&MSPPError=-2147217396
 
 -- Calculates average stalls per read, per write, and per total input/output
 -- for each database file.

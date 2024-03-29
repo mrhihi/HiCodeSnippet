@@ -1,8 +1,8 @@
 /*
-¤ñ¹ï¸ê®Æ®wª«¥ó(TR¡BFN¡BP¡BTF¡BIF¡BV )
-¥Îªk¡G¥ý¦b source ¸ê®Æ®w°õ¦æ¡A·|²£¥Í¤@¬q sql »yªk¡A
-§â³o¬q sql »yªk®³¥h target ¸ê®Æ®w°õ¦æ§Y¥i¡C
-PS. ¹w³]»yªk·|¹L¼{±¼ source ¦³¡A target ¨S¦³ ©Î target ¦³ source ¨S¦³¡A¥u²£¥Í¡u¤£¤@¼Ëªº¡v³¡¥÷¡C
+æ¯”å°è³‡æ–™åº«ç‰©ä»¶(TRã€FNã€Pã€TFã€IFã€V )
+ç”¨æ³•ï¼šå…ˆåœ¨ source è³‡æ–™åº«åŸ·è¡Œï¼Œæœƒç”¢ç”Ÿä¸€æ®µ sql èªžæ³•ï¼Œ
+æŠŠé€™æ®µ sql èªžæ³•æ‹¿åŽ» target è³‡æ–™åº«åŸ·è¡Œå³å¯ã€‚
+PS. é è¨­èªžæ³•æœƒéŽæ…®æŽ‰ source æœ‰ï¼Œ target æ²’æœ‰ æˆ– target æœ‰ source æ²’æœ‰ï¼Œåªç”¢ç”Ÿã€Œä¸ä¸€æ¨£çš„ã€éƒ¨ä»½ã€‚
 */
 
 

@@ -1,10 +1,17 @@
--- °õ¦æ­pµe§Ö¨ú
-    -- https://jonesyeh.wordpress.com/2015/06/01/²M°£°õ¦æ­pµecache¤Î¬d¸ß°õ¦æ­pµecache»yªk/
+-- åŸ·è¡Œè¨ˆç•«å¿«å–
+    -- https://jonesyeh.wordpress.com/2015/06/01/æ¸…é™¤åŸ·è¡Œè¨ˆç•«cacheåŠæŸ¥è©¢åŸ·è¡Œè¨ˆç•«cacheèªæ³•/
     -- https://msdn.microsoft.com/zh-tw/communitydocs/sql-server/ta13031901
--- ¬d¸ß§Ö¨ú
+-- æŸ¥è©¢å¿«å–
     -- http://ithelp.ithome.com.tw/articles/10187558
 
     CHECKPOINT;
     DBCC DROPCLEANBUFFERS ;
     dbcc FREEPROCCACHE;
     go
+
+
+-- https://www.mssqltips.com/sqlservertip/4714/different-ways-to-flush-or-clear-sql-server-cache/
+
+Declare @dbid int = db_ID() 
+DBCC FLUSHPROCINDB (@dbid)
+go

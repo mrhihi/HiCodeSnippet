@@ -1,37 +1,43 @@
--- ¤å¦rÅã¥Ü°õ¦æ­p¹º
+-- æ–‡å­—é¡¯ç¤ºåŸ·è¡Œè¨ˆåŠƒ
 -- SET SHOWPLAN_TEXT OFF
 -- SET SHOWPLAN_ALL ON
 
 -- show conftig
 dbcc showcontig('PartyRole') with tableresults
 
--- ¨Ï¥ÎªÅ¶¡
+-- ä½¿ç”¨ç©ºé–“
 sp_spaceused 'dbo.PartyRole'
 
--- ®Ä¯à¬ÛÃöÂ²³ø
+-- æ•ˆèƒ½ç›¸é—œç°¡å ±
 -- https://www.slideshare.net/cwchiu/sql-server-2008-1917302?next_slideshow=1
 
 
--- sys.dm_db_index_physical_stats »¡©ú
+-- sys.dm_db_index_physical_stats èªªæ˜
 -- https://docs.microsoft.com/zh-tw/sql/relational-databases/system-dynamic-management-views/sys-dm-db-index-physical-stats-transact-sql?view=sql-server-ver15
 
--- ¶ñº¡¦]¯À
+-- å¡«æ»¿å› ç´ 
 -- https://docs.microsoft.com/zh-tw/sql/relational-databases/indexes/specify-fill-factor-for-an-index?view=sql-server-ver15
 
 
--- ¯Á¤Ş¬[ºc©M³]­p«ü«n
+-- ç´¢å¼•æ¶æ§‹å’Œè¨­è¨ˆæŒ‡å—
 -- https://docs.microsoft.com/zh-tw/sql/relational-databases/sql-server-index-design-guide?view=sql-server-ver15
 
 
--- ÀË¬d°õ¦æ­pµeªº handle
+-- æª¢æŸ¥åŸ·è¡Œè¨ˆç•«çš„ handle
 SELECT plan_handle, st.text  
 FROM sys.dm_exec_cached_plans   
 CROSS APPLY sys.dm_exec_sql_text(plan_handle) AS st  
 WHERE text LIKE N'select * from PartyRole where PartyRoleID> 0'; 
 
+-- æ¸…é™¤æŒ‡å®šåŸ·è¡Œè¨ˆç•«çš„å¿«å–
+SELECT 'DBCC FREEPROCCACHE(', plan_handle,')'  
+FROM sys.dm_exec_cached_plans   
+CROSS APPLY sys.dm_exec_sql_text(plan_handle) AS st  
+WHERE text LIKE N'%SYNONYM_WF20_NOTIFICATION_QUEUE%'; 
+
 
 -- https://www.mssqltips.com/sqlservertip/5908/what-is-the-best-value-for-fill-factor-in-sql-server/
--- ÀË¬d¯Á¤Ş¸Hµõµ{«×
+-- æª¢æŸ¥ç´¢å¼•ç¢è£‚ç¨‹åº¦
 -- 'DETAILED' 'SIMPLE'
 SELECT tbl.name TableName
     , idx.name IndexName, idx.fill_factor
@@ -46,13 +52,13 @@ where tbl.object_id = Fragmentation.object_id
     and idx.index_id = Fragmentation.index_id
     and tbl.name LIKE 'PartyRole';	
 
--- ¯Á¤Ş¸Hµõµ{§ÇÂ²©öª©
+-- ç´¢å¼•ç¢è£‚ç¨‹åºç°¡æ˜“ç‰ˆ
 SELECT i.name as IndexName, * 
 FROM sys.dm_db_index_physical_stats(DB_ID(N'CRF_RADAR_M'), OBJECT_ID(N'dbo.PartyRole'), NULL, NULL , 'DETAILED') s
 INNER JOIN sys.indexes i ON s.[object_id] = i.[object_id]
 AND s.index_id = i.index_id
 
--- ­««Ø¯Á¤Ş¨Ã«ü©w fillfactor
+-- é‡å»ºç´¢å¼•ä¸¦æŒ‡å®š fillfactor
 alter index IDX_PartyRole_2 on dbo.PartyRole rebuild with(fillfactor=100)
 alter index PK_PartyRole on dbo.PartyRole rebuild with(fillfactor=100)
 alter table dbo.PartyRole rebuild

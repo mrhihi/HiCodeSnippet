@@ -1,4 +1,4 @@
-﻿/*
+/*
 利用此 SP 可以 table 查出被什麼程序 lock (鎖定) 引發死結的問題
 */
 SET ANSI_NULLS ON

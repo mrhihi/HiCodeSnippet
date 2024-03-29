@@ -1,4 +1,4 @@
---¬İ disk I/O ¥­§¡¶W¹L 20ms ´N¤£¦n
+--çœ‹ disk I/O å¹³å‡è¶…é 20ms å°±ä¸å¥½
 --https://www.facebook.com/mrhihi/posts/10154552186115849
 --Measuring Disk IO performance for SQL Servers
 SELECT

@@ -7,7 +7,7 @@ create procedure spConvertTF2IF
 -- =============================================
 -- Author:		<mrhihi>
 -- Create date: <2015.09.25>
--- Description:	<±N Table value UDF Âà´«¦¨ Inline Table value UDF>
+-- Description:	<å°‡ Table value UDF è½‰æ›æˆ Inline Table value UDF>
 -- History:     <2015.09.25>	[V1.0] New Create
 -- Ex.	
 			
@@ -29,15 +29,15 @@ begin
     declare @NEWLINETAG nvarchar(max); set @NEWLINETAG='[NEWLINE]';
 
     if (not exists (select id from sysobjects where xtype = 'TF' and id = @oid)) begin
-        print @oname + ' ¤£¬O Table value «¬ºAªº UDF! ±N¤£·|³B²zÂà´«!';
+        print @oname + ' ä¸æ˜¯ Table value å‹æ…‹çš„ UDF! å°‡ä¸æœƒè™•ç†è½‰æ›!';
         return;
     end
     if (isnull(@oname, '')='') begin
-        print @oid + ' §ä¤£¨ì¸Óª«¥ó!';
+        print @oid + ' æ‰¾ä¸åˆ°è©²ç‰©ä»¶!';
         return;
     end
 
-    begin /** ¦X¨Ö udf sql »yªk(¦]¬°¤@µ§¥u°O 8000 ªø¡A¶Wªøªº·|³Q¤Á¦n´Xµ§) */
+    begin /** åˆä½µ udf sql èªæ³•(å› ç‚ºä¸€ç­†åªè¨˜ 8000 é•·ï¼Œè¶…é•·çš„æœƒè¢«åˆ‡å¥½å¹¾ç­†) */
         declare @i int = 0;
         declare @body nvarchar(4000); select @body=''
         declare @maxbody nvarchar(max); select @maxbody='';
@@ -54,7 +54,7 @@ begin
 
     declare @tempbody nvarchar(max); select @tempbody=''
 
-    begin /** ³B²z¶}ÀYªº returns result_if2tf as */
+    begin /** è™•ç†é–‹é ­çš„ returns result_if2tf as */
         declare @pos1 int, @pos2 int, @pos3 int;
         select @tempbody = upper(@maxbody);
         select @pos1 = charindex('RETURNS', @tempbody);
@@ -67,13 +67,13 @@ begin
                     select @tempbody = substring(@tempbody, 0, @pos1+7) + ' TABLE AS RETURN( ' + substring(@tempbody, @pos3+len(@TMPTBLNAME), datalength(@tempbody))
                 end
             end else begin
-                print @oname + ' ¤£¬O¨Ï¥Î spConvertIF2TF Âà´«¹Lªº UDF ¡A±N¤£·|³B²zÂà´«!'
+                print @oname + ' ä¸æ˜¯ä½¿ç”¨ spConvertIF2TF è½‰æ›éçš„ UDF ï¼Œå°‡ä¸æœƒè™•ç†è½‰æ›!'
                 return;
             end
         end
     end
 
-    begin /** ³B²z³Ì«áªº return end */
+    begin /** è™•ç†æœ€å¾Œçš„ return end */
         select @tempbody = reverse(@tempbody);
         declare @pos4 int, @pos5 int;
         select @pos4 = charindex('DNE', @tempbody)
@@ -92,11 +92,11 @@ begin
             exec ('drop function ' + @oname + @CRLF)
             exec (@maxbody)
         commit
-        print @oname + ' ±q TF Âà´«¦¨ IF §¹¦¨!';
+        print @oname + ' å¾ TF è½‰æ›æˆ IF å®Œæˆ!';
     END TRY
     BEGIN CATCH
         rollback
-        declare @errmsg nvarchar(4000); set @errmsg = @oname + ' ±q TF Âà´«¦¨ IF ¥¢±Ñ!' + @CRLF+ @CRLF + ERROR_MESSAGE();
+        declare @errmsg nvarchar(4000); set @errmsg = @oname + ' å¾ TF è½‰æ›æˆ IF å¤±æ•—!' + @CRLF+ @CRLF + ERROR_MESSAGE();
         print @errmsg;
     END CATCH
 end

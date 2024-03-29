@@ -1,16 +1,16 @@
 /*
- * ´M§ä¤å¦r²Ä¤@¦¸¥X²{ªº¦ì¸m
+ * å°‹æ‰¾æ–‡å­—ç¬¬ä¸€æ¬¡å‡ºç¾çš„ä½ç½®
  */
 declare 
-    @name nvarchar(max) = ''        -- SQL ª«¥ó¦WºÙ (¹w³]ªÅ¥Õ¬d¥ş³¡)
-    , @ignoreCase bit = 0           -- 0: ¤£©¿²¤¤j¤p¼g        1: ©¿²¤¤j¤p¼g
-    , @printLine bit = 1            -- 0: Åã¥ÜÃöÁä¦r¨ì¦æ§À    1: Åã¥Ü¾ã¦æ
+    @name nvarchar(max) = ''        -- SQL ç‰©ä»¶åç¨± (é è¨­ç©ºç™½æŸ¥å…¨éƒ¨)
+    , @ignoreCase bit = 0           -- 0: ä¸å¿½ç•¥å¤§å°å¯«        1: å¿½ç•¥å¤§å°å¯«
+    , @printLine bit = 1            -- 0: é¡¯ç¤ºé—œéµå­—åˆ°è¡Œå°¾    1: é¡¯ç¤ºæ•´è¡Œ
 
     DECLARE @SEARCHSTRING1 NVARCHAR(MAX)
            ,@SEARCHSTRING2 NVARCHAR(MAX)
            ,@SEARCHSTRING3 NVARCHAR(MAX)
 
-    select @SEARCHSTRING1 = 'fnTranOTHR'
+    select @SEARCHSTRING1 = 'æ™‚å€'
           ,@SEARCHSTRING2 = null
           ,@SEARCHSTRING3 = null
 
@@ -42,12 +42,12 @@ declare
     declare @syscomments table(
         id int,
         [text] nvarchar(max) COLLATE database_default,
-        -- ÃöÁä¦r¦ì¸m
+        -- é—œéµå­—ä½ç½®
         idx1 int,  idx2 int, idx3 int,
         line1 int, line2 int, line3 int,
-        -- ÃöÁä¦r«á²Ä¤@­Ó´«¦æ²Å¸¹¦ì¸m
+        -- é—œéµå­—å¾Œç¬¬ä¸€å€‹æ›è¡Œç¬¦è™Ÿä½ç½®
         idx1_end int, idx2_end int, idx3_end int,
-        -- substring ­n¥Îªº
+        -- substring è¦ç”¨çš„
         idx1_takestar int, idx2_takestar int, idx3_takestar int,
         idx1_takelen int, idx2_takelen int, idx3_takelen int,
         primary key (id)
@@ -74,11 +74,11 @@ declare
     end
 
     update @syscomments
-       set -- ÃöÁä¦r«áªº²Ä¤@­Ó´«¦æ²Å¸¹ªº¦ì¸m
+       set -- é—œéµå­—å¾Œçš„ç¬¬ä¸€å€‹æ›è¡Œç¬¦è™Ÿçš„ä½ç½®
            idx1_end = charindex(@LF, [text], idx1),
            idx2_end = charindex(@LF, [text], idx2),
            idx3_end = charindex(@LF, [text], idx3),
-           -- ­pºâ¦æ¼Æ
+           -- è¨ˆç®—è¡Œæ•¸
            line1 = case when idx1=0 then 0 else idx1 - len(replace(substring([text], 1, idx1),@LF,'')) + 1 end,
            line2 = case when idx2=0 then 0 else idx2 - len(replace(substring([text], 1, idx2),@LF,'')) + 1 end,
            line3 = case when idx3=0 then 0 else idx3 - len(replace(substring([text], 1, idx3),@LF,'')) + 1 end

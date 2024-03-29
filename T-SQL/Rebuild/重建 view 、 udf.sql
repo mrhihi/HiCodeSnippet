@@ -1,4 +1,4 @@
-declare @rebuildSP bit = 0; -- ¬O§_³s stored procedure ³£­n­««Ø(refresh + recompile)
+declare @rebuildSP bit = 0; -- æ˜¯å¦é€£ stored procedure éƒ½è¦é‡å»º(refresh + recompile)
 DECLARE c CURSOR
 FOR
     SELECT  name, type
@@ -18,7 +18,7 @@ FETCH NEXT FROM c INTO @objName, @type;
 WHILE @@fetch_status = 0
     BEGIN
         BEGIN TRY
-            --PRINT '°õ¦æ:' + @objName
+            --PRINT 'åŸ·è¡Œ:' + @objName
             IF @type = 'VIEW' BEGIN
                 EXEC sp_refreshView @objName;
             END ELSE IF @type = 'P' begin
@@ -29,9 +29,9 @@ WHILE @@fetch_status = 0
             END
         END TRY
         BEGIN CATCH
-            PRINT '¥¢±Ñ:' + @objName;
+            PRINT 'å¤±æ•—:' + @objName;
 
-            -- ³oÃä¤£°µ rollback ¦³¥i¯à·|³y¦¨ trnas ¥¼µ²§ô¡C
+            -- é€™é‚Šä¸åš rollback æœ‰å¯èƒ½æœƒé€ æˆ trnas æœªçµæŸã€‚
             -- Roll back any active or uncommittable transactions before
             -- inserting information in the ErrorLog.
             IF XACT_STATE() <> 0

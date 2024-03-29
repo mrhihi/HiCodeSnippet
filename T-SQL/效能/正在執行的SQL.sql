@@ -1,7 +1,7 @@
---°Ñ¦Ò¸ê®Æ¡G https://blog.miniasp.com/post/2010/10/13/How-to-get-current-executing-statements-in-SQL-Server.aspx
+--åƒè€ƒè³‡æ–™ï¼š https://blog.miniasp.com/post/2010/10/13/How-to-get-current-executing-statements-in-SQL-Server.aspx
 
-SELECT      r.scheduler_id as ±Æµ{¾¹ÃÑ§O½X,
-            status         as ­n¨Dªºª¬ºA,
+SELECT      r.scheduler_id as æ’ç¨‹å™¨è­˜åˆ¥ç¢¼,
+            status         as è¦æ±‚çš„ç‹€æ…‹,
             r.session_id   as SPID,
             r.blocking_session_id as BlkBy,
             substring(
@@ -12,15 +12,15 @@ SELECT      r.scheduler_id as ±Æµ{¾¹ÃÑ§O½X,
                  THEN LEN(CONVERT(nvarchar(MAX), q.text)) * 2
                  ELSE r.statement_end_offset
                  END - r.statement_start_offset)/2)
-                 AS [¥¿¦b°õ¦æªº T-SQL ©R¥O],
+                 AS [æ­£åœ¨åŸ·è¡Œçš„ T-SQL å‘½ä»¤],
             r.cpu_time      as [CPU Time(ms)],
-            r.start_time    as [¶}©l®É¶¡],
-            r.total_elapsed_time as [°õ¦æÁ`®É¶¡],
-            r.reads              as [Åª¨ú¼Æ],
-            r.writes             as [¼g¤J¼Æ],
-            r.logical_reads      as [ÅŞ¿èÅª¨ú¼Æ],
-            -- q.text, /* §¹¾ãªº T-SQL «ü¥O½X */
-            d.name               as [¸ê®Æ®w¦WºÙ]
+            r.start_time    as [é–‹å§‹æ™‚é–“],
+            r.total_elapsed_time as [åŸ·è¡Œç¸½æ™‚é–“],
+            r.reads              as [è®€å–æ•¸],
+            r.writes             as [å¯«å…¥æ•¸],
+            r.logical_reads      as [é‚è¼¯è®€å–æ•¸],
+            -- q.text, /* å®Œæ•´çš„ T-SQL æŒ‡ä»¤ç¢¼ */
+            d.name               as [è³‡æ–™åº«åç¨±]
 FROM        sys.dm_exec_requests r 
 			CROSS APPLY sys.dm_exec_sql_text(sql_handle) AS q
 			LEFT JOIN sys.databases d ON (r.database_id=d.database_id)
