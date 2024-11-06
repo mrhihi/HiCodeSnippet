@@ -9,7 +9,7 @@ DECLARE db_cursor CURSOR FAST_FORWARD FOR
             CASE
                     WHEN ps.avg_fragmentation_in_percent > 15
                     THEN 'REBUILD With (MAXDOP=1)'
-                    ELSE 'REORGANIZE With (MAXDOP=1)'
+                    ELSE 'REORGANIZE'
             END +
             CASE
                     WHEN pc.partition_count > 1
